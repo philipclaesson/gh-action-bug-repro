@@ -1,0 +1,22 @@
+name: Deploy dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  workflow-deploy-passed:
+    name: Deploy Passed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Dev Status Check
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.checks.create({
+              name: "Deploy Dev",
+              head_sha: context.sha,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              status: "completed",
+              conclusion: "success",
+            })
