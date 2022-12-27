@@ -8,7 +8,7 @@ jobs:
     name: Deploy Passed
     runs-on: ubuntu-latest
     steps:
-      - name: Create Dev Status Check
+      - name: Create Dev Status Checks
         uses: actions/github-script@v5
         with:
           script: |
