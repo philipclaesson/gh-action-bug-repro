@@ -11,16 +11,9 @@ jobs:
         shell: bash
         run: |
             python3 -c '
-            def fmt_level(level, msg):
-                c, end = "", ""
-                if level.lower().startswith("warn"):
-                    c = "\033[93m"
-                    end = "\033[0m"
-                elif level.lower().startswith("err"):
-                    c = "\033[91m"
-                    end = "\033[0m"
+            def fmt(level, msg):
+                c, end = ("\033[91m", "\033[0m") if level.lower().startswith("err") else ("", "")
                 return "{}{}{}: {}".format(c, level, end, msg)
-            print(fmt_level("Warning", "yoyoyoyo"))
-            print(fmt_level("Error", "yoyoyoyo"))
-            print(fmt_level("Info", "yoyoyoyo"))
+            print(fmt("Error", "yoyoyoyo"))
+            print(fmt("Info", "yoyoyoyo"))
             '
