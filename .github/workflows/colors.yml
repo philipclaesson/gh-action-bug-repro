@@ -1,0 +1,19 @@
+name: Colors
+
+on: push
+
+jobs:
+  colors-debug:
+    name: Colorssss
+    runs-on: ubuntu-latest
+    steps:
+      - name: test colors
+        shell: bash
+        run: |
+            python3 -c '
+            def fmt(level, msg):
+                c, end = ("\033[91m", "\033[0m") if level.lower().startswith("err") else ("", "")
+                return "{}{}{}: {}".format(c, level, end, msg)
+            print(fmt("Error", "yoyoyoyo"))
+            print(fmt("Info", "yoyoyoyo"))
+            '
