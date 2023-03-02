@@ -11,9 +11,14 @@ jobs:
         shell: bash
         run: |
             python3 -c '
-            warn = "\033[93m"
-            err = "\033[91m"
-            end = "\033[0m"
-            print(warn + "WARN" + end + ": some error message")
-            print(err + "ERROR" + end + ": some error message")
+            def fmt_level(level, msg):
+                if level.lower().startswith("warn"):
+                    return "\033[48;5;196m\033[93m" + level + "\033[0m" + msg + "\033[0m"
+                elif level.lower().startswith("err"):
+                    return "\033[48;5;196m\033[91m" + level + "\033[0m" + msg + "\033[0m"
+                else:
+                    return level
+            print(fmt_level("warn:", "yoyoyoyo"))
+            print(fmt_level("err:", "yoyoyoyo"))
+            print(fmt_level("info:", "yoyoyoyo"))
             '
