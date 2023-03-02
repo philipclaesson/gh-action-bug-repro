@@ -12,13 +12,15 @@ jobs:
         run: |
             python3 -c '
             def fmt_level(level, msg):
+                c, end = "", ""
                 if level.lower().startswith("warn"):
-                    return "\033[48;5;196m\033[93m" + level + "\033[0m" + msg + "\033[0m"
+                    c = "\033[93m"
+                    end = "\033[0m"
                 elif level.lower().startswith("err"):
-                    return "\033[48;5;196m\033[91m" + level + "\033[0m" + msg + "\033[0m"
-                else:
-                    return level
-            print(fmt_level("warn:", "yoyoyoyo"))
-            print(fmt_level("err:", "yoyoyoyo"))
-            print(fmt_level("info:", "yoyoyoyo"))
+                    c = "\033[91m"
+                    end = "\033[0m"
+                return "{}{}{}: {}".format(c, level, end, msg)
+            print(fmt_level("Warning", "yoyoyoyo"))
+            print(fmt_level("Error", "yoyoyoyo"))
+            print(fmt_level("Info", "yoyoyoyo"))
             '
